@@ -32,6 +32,20 @@ kotlin {
             implementation(compose.components.uiToolingPreview)
             implementation(libs.androidx.lifecycle.viewmodelCompose)
             implementation(libs.androidx.lifecycle.runtimeCompose)
+
+//          Multiplatform icons
+            implementation(libs.compose.icons)
+
+//          Koin common
+            implementation(libs.koin.compose)
+            implementation(libs.koin.compose.viewmodel)
+            implementation(libs.koin.compose.viewmodel.navigation)
+
+//          Voyager
+            implementation(libs.voyager.navigator)
+            implementation(libs.voyager.screenModel)
+            implementation(libs.voyager.koin)
+            implementation(libs.voyager.transitions)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
