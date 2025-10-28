@@ -160,7 +160,3 @@ KoinApplication( application = {
 ## 📄 Licencia
 
 Este proyecto es un recurso de demostración y educativo. Siéntete libre de usarlo como referencia para tus propios proyectos.
-
----
-
-**Español** | **[English](./README.md)**
