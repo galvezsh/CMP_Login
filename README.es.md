@@ -3,6 +3,7 @@
 [![Kotlin](https://img.shields.io/badge/Kotlin-2.2.20-blue.svg?style=flat&logo=kotlin)](https://kotlinlang.org)
 [![Compose Multiplatform](https://img.shields.io/badge/Compose%20Multiplatform-1.9.0-brightgreen.svg)](https://www.jetbrains.com/lp/compose-multiplatform/)
 [![Koin](https://img.shields.io/badge/Koin-4.1.0-orange.svg)](https://insert-koin.io/)
+[![Voyager](https://img.shields.io/badge/Voyager-1.1.0_Beta03-purple.svg)](https://voyager.adriel.cafe/)
 
 Un **proyecto de demostración** que muestra layouts adaptativos en **Compose Multiplatform** con inyección de dependencias **Koin**. Este proyecto demuestra cómo construir interfaces responsivas que se adaptan automáticamente a diferentes tamaños de pantalla en plataformas Android y Desktop.
 

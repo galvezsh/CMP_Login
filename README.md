@@ -3,8 +3,9 @@
 [![Kotlin](https://img.shields.io/badge/Kotlin-2.2.20-blue.svg?style=flat&logo=kotlin)](https://kotlinlang.org)
 [![Compose Multiplatform](https://img.shields.io/badge/Compose%20Multiplatform-1.9.0-brightgreen.svg)](https://www.jetbrains.com/lp/compose-multiplatform/)
 [![Koin](https://img.shields.io/badge/Koin-4.1.0-orange.svg)](https://insert-koin.io/)
+[![Voyager](https://img.shields.io/badge/Voyager-1.1.0_Beta03-purple.svg)](https://voyager.adriel.cafe/)
 
--> También disponible en ESPAÑOL <-
+**También disponible en ESPAÑOL** -->
 **[Español](README.es.md)** | **English**
 
 A **demonstration project** showcasing adaptive UI layouts in **Compose Multiplatform** with **Koin** dependency injection. This project demonstrates how to build responsive interfaces that automatically adapt to different screen sizes across Android and Desktop platforms.
