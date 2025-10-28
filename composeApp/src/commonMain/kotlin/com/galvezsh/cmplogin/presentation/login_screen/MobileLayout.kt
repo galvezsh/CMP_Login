@@ -4,7 +4,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -13,27 +12,26 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.Checkbox
-import androidx.compose.material3.CheckboxDefaults
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.galvezsh.cmplogin.presentation.shared.EmailField
-import com.galvezsh.cmplogin.presentation.shared.PasswordField
+import com.galvezsh.cmplogin.presentation.shared.LoginButton
+import com.galvezsh.cmplogin.presentation.shared.LoginCheckBox
+import com.galvezsh.cmplogin.presentation.shared.LoginEmailField
+import com.galvezsh.cmplogin.presentation.shared.LoginHeaderTexts
+import com.galvezsh.cmplogin.presentation.shared.LoginPasswordField
 
+/**
+ * Mobile Layout - Single-column design
+ * Optimized for smaller screens (< 840dp)
+ */
 @Composable
 fun MobileLayout( viewModel: LoginViewModel, onPressedLoginButton: () -> Unit ) {
 
@@ -54,121 +52,60 @@ fun MobileLayout( viewModel: LoginViewModel, onPressedLoginButton: () -> Unit ) 
                 .verticalScroll( state = rememberScrollState() ),
         ) {
 
-            LoginHeader()
-            Spacer(modifier = Modifier.height(32.dp))
-            LoginBody(
-                username = username,
-                onUsernameChanged = viewModel::onUsernameChanged,
-                password = password,
-                onPasswordChanged = viewModel::onPasswordChanged,
-                rememberMe = rememberMe,
-                onRememberMeChanged = viewModel::onRememberMeChanged
+            // LOGIN HEAD
+            Surface(
+                shape = CircleShape,
+                color = Color(0xFF1976D2),
+                modifier = Modifier.size(84.dp),
+            ) {}
+            Spacer( modifier = Modifier.height( height = 32.dp ))
+            LoginHeaderTexts(
+                titleText = "Application name",
+                titleFontSize = 32.sp,
+                subtitleText = "Application description label",
+                subtitleFontSize = 16.sp
             )
+            Spacer( modifier = Modifier.height( height = 32.dp ))
 
-            Button(
-                onClick = onPressedLoginButton,
-                modifier = Modifier.fillMaxWidth().height(52.dp),
-                shape = RoundedCornerShape(8.dp),
-                enabled = if ( username.isNotEmpty() && password.isNotEmpty() && !isLoading ) true else false,
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = Color(0xFF1976D2),
-                    disabledContainerColor = Color(0xFF184A93)
-                )
+            // LOGIN BODY
+            Column (
+                modifier = Modifier.fillMaxWidth(),
+                verticalArrangement = Arrangement.spacedBy( space = 8.dp )
             ) {
-                if ( isLoading ) {
-                    CircularProgressIndicator(
-                        modifier = Modifier.size(24.dp),
-                        color = Color.White,
-                        strokeWidth = 2.dp
-                    )
-                } else {
-                    Text("Log In", color = if ( username.isNotEmpty() && password.isNotEmpty() ) Color.White else Color(0xFFB0B0B0), fontSize = 16.sp)
-                }
+
+                LoginEmailField(
+                    label = "Email or username",
+                    fontSize = 16.sp,
+                    placeholder = "Insert your email or username",
+                    value = username,
+                    onValueChanged = viewModel::onUsernameChanged
+
+                )
+                Spacer( modifier = Modifier.height( height = 8.dp ))
+                LoginPasswordField(
+                    label = "Password",
+                    fontSize = 16.sp,
+                    placeholder = "Insert your password",
+                    value = password,
+                    onValueChanged = viewModel::onPasswordChanged
+                )
             }
-        }
-    }
-}
 
-@Composable
-private fun LoginHeader() {
-    Surface(
-        shape = CircleShape,
-        color = Color(0xFF1976D2),
-        modifier = Modifier.size(84.dp),
-    ) {}
-    Spacer( modifier = Modifier.height( 32.dp ) )
-    Text(
-        text = "Application name",
-        fontSize = 28.sp,
-        fontWeight = FontWeight.Bold,
-        color = Color(0xFF1A1A1A)
-    )
-    Spacer( modifier = Modifier.height( 8.dp ) )
-    Text(
-        text = "Application description label",
-        fontSize = 14.sp,
-        color = Color(0xFF6E6E6E),
-    )
-}
-
-@Composable
-private fun LoginBody(
-    username: String,
-    onUsernameChanged: (String) -> Unit,
-    password: String,
-    onPasswordChanged: (String) -> Unit,
-    rememberMe: Boolean,
-    onRememberMeChanged: (Boolean) -> Unit
-) {
-    Column (
-        modifier = Modifier.fillMaxWidth(),
-        verticalArrangement = Arrangement.spacedBy(8.dp)
-    ) {
-
-        Text(
-            text = "Email or username",
-            fontSize = 16.sp,
-            color = Color(0xFF1A1A1A),
-            fontWeight = FontWeight.Bold
-        )
-        EmailField(
-            placeholder = "Insert your email or username",
-            value = username,
-            onValueChanged = onUsernameChanged
-
-        )
-        Spacer(modifier = Modifier.height(8.dp))
-        Text(
-            text = "Password",
-            fontSize = 16.sp,
-            color = Color(0xFF1A1A1A),
-            fontWeight = FontWeight.Bold
-        )
-        PasswordField(
-            placeholder = "Insert your password",
-            value = password,
-            onValueChanged = onPasswordChanged
-        )
-    }
-
-    Row(
-        verticalAlignment = Alignment.CenterVertically,
-        modifier = Modifier.fillMaxWidth().padding( vertical = 32.dp ),
-    ) {
-        Checkbox(
-            checked = rememberMe,
-            onCheckedChange = onRememberMeChanged,
-            modifier = Modifier.size(18.dp),
-            colors = CheckboxDefaults.colors(
-                checkedColor = Color(0xFF1976D2),
-                uncheckedColor = Color(0xFFB0B0B0)
+            LoginCheckBox(
+                text = "Remember me",
+                fontSize = 14.sp,
+                checked = rememberMe,
+                onCheckedChange = viewModel::onRememberMeChanged
             )
-        )
-        Spacer( modifier = Modifier.padding( end = 8.dp ) )
-        Text(
-            text = "Remember me",
-            fontSize = 14.sp,
-            color = Color(0xFF333333)
-        )
+
+            LoginButton(
+                text = "Log In",
+                fontSize = 16.sp,
+                isEnabled = username.isNotEmpty() && password.isNotEmpty(),
+                isLoading = isLoading,
+                modifier = Modifier.fillMaxWidth().height( height =  52.dp ),
+                onClick = onPressedLoginButton
+            )
+        }
     }
 }

@@ -17,14 +17,14 @@ enum class ScreenType {
  * 
  * Breakpoints:
  * - MOBILE: < 600dp
- * - TABLET: 600dp - 840dp
- * - DESKTOP: > 840dp
+ * - TABLET: 600dp - 880dp
+ * - DESKTOP: > 880dp
  */
 @Composable
-fun getScreenType(currentWidth: Dp): ScreenType {
+fun getScreenType( currentWidth: Dp ): ScreenType {
     return when {
         currentWidth < 600.dp -> ScreenType.MOBILE
-        currentWidth < 840.dp -> ScreenType.TABLET
+        currentWidth < 880.dp -> ScreenType.TABLET
         else -> ScreenType.DESKTOP
     }
 }
@@ -34,11 +34,8 @@ fun getScreenType(currentWidth: Dp): ScreenType {
  * Use this to wrap your content and get automatic screen type detection.
  */
 @Composable
-fun AdaptiveLayout(
-    content: @Composable (ScreenType) -> Unit
-) {
+fun AdaptiveLayout( content: @Composable (ScreenType) -> Unit ) {
     BoxWithConstraints {
-        val screenType = getScreenType(maxWidth)
-        content(screenType)
+        content( getScreenType( currentWidth =  maxWidth ) )
     }
 }
